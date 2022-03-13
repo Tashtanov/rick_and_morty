@@ -1,0 +1,123 @@
+import 'package:flutter/cupertino.dart';
+import 'package:rick_and_morty/common/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:rick_and_morty/feature/domain/entities/person_entitie.dart';
+import 'package:rick_and_morty/feature/presentation/pages/person_detail_screen.dart';
+import 'package:rick_and_morty/feature/presentation/widgets/person_cached_imege.dart';
+
+class PersonCard extends StatelessWidget {
+  final PersonEntity person;
+
+  const PersonCard({Key? key, required this.person}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>PersonDetailScreen(person:person)));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: AppColors.cellBackground,
+            borderRadius: BorderRadius.circular(8)),
+        child: Row(
+          children: [
+            Container(
+              child: PersonCachedImage(
+                width: 166,
+                height: 166,
+                imageUrl: person.image,
+              ),
+            ),
+            SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    person.name,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 8.0,
+                        width: 8.0,
+                        decoration: BoxDecoration(
+                            color: person.status == 'Alive'
+                                ? Colors.green
+                                : Colors.red,
+                            borderRadius: BorderRadius.circular(8)),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(
+                          child: Text(
+                        '${person.status}-${person.species}',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'Last known location:',
+                    style: TextStyle(color: AppColors.geryColor),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    '${person.location.name}',
+                    style: TextStyle(color: Colors.white),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'Origin:',
+                    style: TextStyle(color: AppColors.geryColor),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    '${person.origin.name}',
+                    style: TextStyle(color: Colors.white),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

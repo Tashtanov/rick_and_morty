@@ -17,7 +17,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           theme: ThemeData.dark().copyWith(
-            backgroundColor: AppColors.mainBackground,
             scaffoldBackgroundColor: AppColors.mainBackground,
           ),
           home: const HomePage(),
